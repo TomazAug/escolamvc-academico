@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Fragmento de código que será substituído pelo conteúdo do fragmento "heads" -->
+    <div th:replace="fragments/heads :: heads"></div>
+    <title>Cadastro de Alunos</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: cabecalho"></div>
+    <div class="row">
+
+        <div class="col">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Cadastro de <b>Alunos</b></h2>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Pesquisar -->
+                <div class="col-sm-6">
+                    <form th:action="@{/aluno/buscar}" method="post">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nome"/>
+                            <button class="btn btn-primary" type="submit" value="Buscar">
+                                Buscar
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Botão Cadastrar -->
+                <div class="col-sm-6">
+                    <a style="float: right" th:href="@{/aluno/novo}" class="btn btn-success">
+                        Cadastrar <i class="fa-solid fa-floppy-disk"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <span th:text="${mensagem}"></span>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Data de Nascimento</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${alunos.empty}">
+                    <td colspan="2">Sem Alunos</td>
+                </tr>
+                <tr th:each="aluno : ${alunos}">
+                    <td><span th:text="${aluno.id}"> Id </span></td>
+                    <td><span th:text="${aluno.matricula}"> Matrícula </span></td>
+                    <td><span th:text="${aluno.nome}"> Nome </span></td>
+                    <td><span th:text="${aluno.cpf}"> CPF </span></td>
+                    <td><span th:text="${aluno.email}"> Email </span></td>
+                    <td><span th:text="${#dates.format(aluno.dataNascimento, 'dd/MM/yyyy')}"> Data de Nascimento </span></td>
+                    <td>
+                        <a class="btn btn-outline-danger btn-sm"
+                           th:href="@{/aluno/excluir/{id}(id=${aluno.id})}"
+                           th:data-confirm-delete="|Você gostaria de apagar ${aluno.nome}?|"
+                           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                            Apagar <i class="fa-solid fa-trash"></i>
+                        </a>
+
+                        <a class="btn btn-outline-primary btn-sm"
+                           th:href="@{/aluno/alterar/{id}(id=${aluno.id})}">Editar <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div th:replace="fragments/footer :: footer">
+    </div>
+</div>
+</body>
+
+</html>

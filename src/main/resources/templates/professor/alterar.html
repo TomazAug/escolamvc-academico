@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Fragmento de código que será substituído pelo conteúdo do fragmento "heads" -->
+    <div th:replace="fragments/heads :: heads"></div>
+    <title>Alterar Professor</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: cabecalho"></div>
+    <h1>Alterar Professor</h1>
+
+    <form action="#" th:action="@{/professor/alterar/{id}(id=${professor.id})}" th:object="${professor}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="row mb-3">
+            <label class="col-sm-1 col-form-label">Nome:</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" th:field="*{nome}">
+            </div>
+            <div class="col-sm-5">
+                <span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-1 col-form-label">CPF:</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" th:field="*{cpf}">
+            </div>
+            <div class="col-sm-5">
+                <span class="mensagem" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-1 col-form-label">Email:</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" th:field="*{email}">
+            </div>
+            <div class="col-sm-5">
+                <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-1 col-form-label">Data de Nascimento:</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="date" th:field="*{dataNascimento}">
+            </div>
+            <div class="col-sm-5">
+                <span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Gravar"/>
+    </form>
+    <div th:replace="fragments/footer :: footer">
+    </div>
+</body>
+</html>

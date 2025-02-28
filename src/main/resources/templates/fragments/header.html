@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="cabecalho" class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <img th:src="@{/img/logo.png}" alt="Logo" width="200" />
+    <span class="fs-4" style="margin-left: 5px;"> CRUD TECDEV</span>
+  </a>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Alunos</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Professores</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Turma</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Formações</a></li>
+  </ul>
+</header>
+</body>
+</html>
